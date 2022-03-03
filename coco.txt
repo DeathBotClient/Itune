@@ -1,0 +1,93 @@
+import os
+import sys
+import random
+import string
+import requests
+import base64
+import time
+import threading
+
+
+    
+
+def encode(pasEn):
+    base64_message = pasEn
+    base64_bytes = base64_message.encode('ascii')
+    message_bytes = base64.b64decode(base64_bytes)
+    message = message_bytes.decode('ascii')
+    global pas
+    pas = message
+
+def gen_random_string(leng):
+    random_list=[]
+    for i in range(leng):
+        random_list.append(random.choice(string.ascii_uppercase + string.digits))
+    return(''.join(random_list))
+
+
+def main():
+        global l
+        l = 0
+        os.system("clear")
+        a = int(input("Amout>> "))
+        os.system("clear")
+        i = 20
+        o = int(a)
+        scanned = []
+        correct = []
+        print("Starting Script!")
+        for i in range(a):
+            scanned.append(gen_random_string(16))
+        
+        lens_correct = len(correct)
+        lens_scanned = len(scanned)
+        str_correct = str(lens_correct)
+        str_scanned = str(lens_scanned)
+        l = 3
+        os.system("clear")
+
+        tim2 = str(i)
+        print("This Took " + tim2 + " Seconds")
+        print("")
+        print(str_scanned + " Was Scanned Successfully")
+        print("")
+        print("")
+        print("")
+        for word in scanned:
+          print(word)
+          print("")
+
+
+    
+
+    
+
+
+def Find():
+    op = open('pas.txt', 'r')
+    for word in op:
+        message = word
+        message_bytes = message.encode('ascii')
+        base64_bytes = base64.b64encode(message_bytes)
+        base64_message = base64_bytes.decode('ascii')
+        global pasEn
+        pasEn = base64_message
+
+
+def Start():
+    Find()
+    encode(pasEn)
+    a = input("password>> ")
+    if a == pas:
+        print("Password Correct!")
+        time.sleep(2)
+        print("Loading...")
+        time.sleep(2)
+        main()
+    else:
+        print("password Incorrect!")
+        time.sleep(5)
+        Start()
+
+
+Start()
